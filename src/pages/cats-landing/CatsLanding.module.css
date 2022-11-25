@@ -6,9 +6,12 @@
 }
 
 .tile-container {
-        display: grid;
-        gap: 50px 114px;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        display: flex;
+        flex-wrap: wrap;
+}
+
+.tile-container > * {
+      margin: 20px 3%;
 }
 
 .loading-container {

@@ -20,7 +20,9 @@ const Modal = (props) => {
         portalTarget
       )}
       {ReactDOM.createPortal(
-        <ModalOverlay>{props.children}</ModalOverlay>,
+        <div className={classes["modal-container"]}>
+          <ModalOverlay>{props.children}</ModalOverlay>
+        </div>,
         portalTarget
       )}
     </React.Fragment>

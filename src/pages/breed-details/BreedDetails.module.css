@@ -1,0 +1,32 @@
+.body {
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+}
+
+.body .col1 {
+    width: 50%;
+    border-radius: 14px 0 0 14px;   
+}
+
+.body .col2 {
+    width: 50%
+}
+
+.tile-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    
+}
+
+.tile-container .tile{
+    margin: 4px 8px;
+}
+
+.loading-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

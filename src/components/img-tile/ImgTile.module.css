@@ -6,6 +6,11 @@
     cursor: pointer;
 }
 
+.tile.small {
+    height: 100px;
+    width: 100px;
+}
+
 .tile img {
    height: 100%;
    width: 100%;

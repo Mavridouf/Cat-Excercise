@@ -1,21 +1,21 @@
 import { useState } from "react";
-import { getCats } from "../api/cats";
+import { getBreeds } from "../api/cats";
 
-export function useCats() {
+export function useBreeds() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [catsList, setCatsList] = useState(null);
+  const [breedList, setBreedList] = useState(null);
 
-  const fetchCats = (limit, breed) => {
+  const fetchBreeds = () => {
     setLoading(true);
     setError(false);
-    getCats(limit, breed)
+    getBreeds()
       .then((resp) => {
-        setCatsList(resp.data);
+        setBreedList(resp.data);
         setError(false);
       })
       .catch(() => {
-        setCatsList(null);
+        setBreedList(null);
         setError(true);
       })
       .finally(() => {
@@ -23,15 +23,15 @@ export function useCats() {
       });
   };
 
-  const clearCatsList = () => {
-    setCatsList(null);
+  const clearBreedList = () => {
+    setBreedList(null);
   };
 
   return {
     loading,
     error,
-    catsList,
-    fetchCats,
-    clearCatsList,
+    breedList,
+    fetchBreeds,
+    clearBreedList,
   };
 }

@@ -17,7 +17,7 @@ function CatsLanding() {
   } = catsContext;
 
   useEffect(() => {
-    catsContext.fetchCats();
+    fetchCats(10);
     return () => {
       clearCatsList();
     };
@@ -32,7 +32,7 @@ function CatsLanding() {
   return (
     <React.Fragment>
       <div className={classes["top-row"]}>
-        <Button click={fetchCats}>Update Cats</Button>
+        <Button click={() => fetchCats(10)}>Update Cats</Button>
       </div>
       {loading && (
         <div className={classes["loading-container"]}>Loading ...</div>

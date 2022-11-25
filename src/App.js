@@ -5,24 +5,27 @@ import CatsLanding from "./pages/cats-landing/CatsLanding";
 import Breeds from "./pages/breeds/Breeds";
 import Favourites from "./pages/favourites/Favourites";
 import { CatsProvider } from "./context/cats-context";
+import { BreedsProvider } from "./context/breeds-context";
 import { CatDetailsProvider } from "./context/cat-details-context";
 
 function App() {
   return (
     <CatsProvider>
-      <CatDetailsProvider>
-        <div className="App">
-          <Header></Header>
-          <div className={classes.container}>
-            <Routes>
-              <Route path="/" element={<Navigate replace to="/cats" />} />
-              <Route path="/cats/*" element={<CatsLanding />}></Route>
-              <Route path="/breeds" element={<Breeds />}></Route>
-              <Route path="/favourites" element={<Favourites />}></Route>
-            </Routes>
+      <BreedsProvider>
+        <CatDetailsProvider>
+          <div className="App">
+            <Header></Header>
+            <div className={classes.container}>
+              <Routes>
+                <Route path="/" element={<Navigate replace to="/cats" />} />
+                <Route path="/cats/*" element={<CatsLanding />}></Route>
+                <Route path="/breeds/*" element={<Breeds />}></Route>
+                <Route path="/favourites" element={<Favourites />}></Route>
+              </Routes>
+            </div>
           </div>
-        </div>
-      </CatDetailsProvider>
+        </CatDetailsProvider>
+      </BreedsProvider>
     </CatsProvider>
   );
 }
