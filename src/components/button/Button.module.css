@@ -1,0 +1,21 @@
+.button {
+    all: unset;
+    display: inline-flex;
+    padding: 12px 12px;
+    background-color: var(--primary-color);
+    color: var(--invert-text-color);
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: var(--primary-color-dark);
+}
+
+.button:focus {
+    background-color: var(--primary-color-dark);
+}
+
+.button:active {
+    background-color: var(--primary-color-darkest);
+}

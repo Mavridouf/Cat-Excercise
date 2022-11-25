@@ -1,0 +1,15 @@
+:root {
+    --primary-color: #de1b76;
+    --primary-color-dark: #c7186a;
+    --primary-color-darkest: #b1155e;
+    
+    --background-color-white: #fff;
+    --background-color-gray: #F0F4F9;
+    --background-color-black: #000;
+    --background-color-black-400: #00000040;
+
+
+    --primary-text-color: #191530;
+    --secondary-text-color: #de1b76;
+    --invert-text-color: #fff;
+}

@@ -1,0 +1,36 @@
+.header {
+    height: 80px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--primary-text-color);
+    background-color: #fff;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+}
+
+h2 {
+    margin-left: 24px;
+}
+
+.link-container {
+    display: flex;
+    align-items: center;
+}
+
+.link-container a {
+    margin: 0 24px;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 6px 0;
+}
+
+.link-container a:hover {
+    color: var(--secondary-text-color)
+
+}
+
+.link-container a.active {
+    color: var(--secondary-text-color);
+    border-bottom: 3px solid var(--primary-color)
+} 
