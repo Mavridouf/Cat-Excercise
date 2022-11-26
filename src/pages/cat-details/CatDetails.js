@@ -24,7 +24,7 @@ function CatDetails() {
 
   const copyImgUrl = () => {
     navigator.clipboard
-      .writeText(catDetailsContext?.catDetails?.url)
+      .writeText(window.location.href)
       .then(() => console.log("ok"))
       .catch(() => console.log("failed"));
   };
