@@ -2,9 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import classes from "./BreedItem.module.css";
 
-const BreedItem = (props) => {
+const BreedItem = ({ name, id }) => {
   const navigate = useNavigate();
-  const { name, id } = props;
 
   return (
     <div

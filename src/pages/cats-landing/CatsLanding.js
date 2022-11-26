@@ -5,7 +5,8 @@ import ImgTile from "../../components/img-tile/ImgTile";
 import classes from "./CatsLanding.module.css";
 import { Route, Routes } from "react-router-dom";
 import CatDetails from "../cat-details/CatDetails";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRefresh } from "@fortawesome/free-solid-svg-icons";
 function CatsLanding() {
   const catsContext = useContext(CatsContext);
 
@@ -21,7 +22,7 @@ function CatsLanding() {
     return () => {
       clearCatsList();
     };
-  }, []);
+  }, [fetchCats, clearCatsList]);
 
   const catListImgTiles = () => {
     return catsListData?.map((cat) => (
@@ -32,7 +33,11 @@ function CatsLanding() {
   return (
     <React.Fragment>
       <div className={classes["top-row"]}>
-        <Button click={() => fetchCats(10)}>Update Cats</Button>
+        <Button click={() => fetchCats(10)}>
+          {" "}
+          <FontAwesomeIcon className={classes["btn-icon"]} icon={faRefresh} />
+          Update Cats
+        </Button>
       </div>
       {loading && (
         <div className={classes["loading-container"]}>Loading ...</div>

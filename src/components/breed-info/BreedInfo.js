@@ -1,8 +1,7 @@
 import React from "react";
 import classes from "./BreedInfo.module.css";
 
-const BreedInfo = (props) => {
-  const { breed } = props;
+const BreedInfo = ({ breed }) => {
   return (
     <div className={classes["breed-details"]}>
       <h3>{breed.name}</h3>

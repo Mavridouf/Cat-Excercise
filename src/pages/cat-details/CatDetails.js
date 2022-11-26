@@ -6,9 +6,16 @@ import Button from "../../components/button/Button";
 import CatDetailsContext from "../../context/cat-details-context";
 import classes from "./CatDetails.module.css";
 import BreedInfo from "../../components/breed-info/BreedInfo";
+import { useFavourites } from "../../hooks/favourites";
+import ToastsContext, { toastTypes } from "../../context/toasts-context";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCopy, faHeart } from "@fortawesome/free-solid-svg-icons";
 
 function CatDetails() {
   const catDetailsContext = useContext(CatDetailsContext);
+  const { addToast } = useContext(ToastsContext);
+
+  const { addToFavourites } = useFavourites();
   const params = useParams();
   const navigate = useNavigate();
 
@@ -25,8 +32,8 @@ function CatDetails() {
   const copyImgUrl = () => {
     navigator.clipboard
       .writeText(window.location.href)
-      .then(() => console.log("ok"))
-      .catch(() => console.log("failed"));
+      .then(() => addToast(toastTypes.Info, "Copied Modal URL"))
+      .catch(() => addToast(toastTypes.Error, "Failed to Copy Modal URL"));
   };
 
   return (
@@ -52,8 +59,20 @@ function CatDetails() {
                 </div>
               )}
               <div className={classes["footer"]}>
-                <Button>Fav it</Button>
-                <Button click={copyImgUrl}>Copy Link</Button>
+                <Button click={() => addToFavourites(catDetails.id)}>
+                  <FontAwesomeIcon
+                    className={classes["btn-icon"]}
+                    icon={faHeart}
+                  />
+                  Fav it
+                </Button>
+                <Button click={copyImgUrl}>
+                  <FontAwesomeIcon
+                    className={classes["btn-icon"]}
+                    icon={faCopy}
+                  />
+                  Copy Link
+                </Button>
               </div>
             </div>
           </Fragment>

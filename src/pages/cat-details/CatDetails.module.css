@@ -61,6 +61,10 @@
     justify-content: end;
 }
 
-.body .col2 .footer *{
+.body .col2 .footer > * {
     margin-left: 8px;
+}
+
+.btn-icon {
+    margin-right: 8px;
 }

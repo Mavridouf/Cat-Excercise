@@ -12,4 +12,11 @@
     --primary-text-color: #191530;
     --secondary-text-color: #de1b76;
     --invert-text-color: #fff;
+
+    --color-error: #ff5722;
+    --color-error-light: #ff8a65;
+    --color-info: #2196f3;
+    --color-info-light: #64b5f6; 
+    --color-success: #66bb6a;
+    --color-success-light:#81c784
 }

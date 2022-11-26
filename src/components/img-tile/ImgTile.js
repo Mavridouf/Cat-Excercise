@@ -1,10 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import classes from "./ImgTile.module.css";
 
-const ImgTile = (props) => {
+const ImgTile = ({ url, id, isSmall = false }) => {
   const navigate = useNavigate();
-
-  const { url, id, isSmall = false } = props;
 
   return (
     <div

@@ -1,9 +1,9 @@
 import classes from "./Button.module.css";
 
-const Button = (props) => {
+const Button = ({ click, children }) => {
   return (
-    <button onClick={props.click} className={classes.button}>
-      {props.children}
+    <button onClick={click} className={classes.button}>
+      {children}
     </button>
   );
 };

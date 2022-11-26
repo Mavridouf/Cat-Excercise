@@ -30,7 +30,7 @@ function BreedDetails() {
     return () => {
       clearCatsList();
     };
-  }, []);
+  }, [fetchCats, clearCatsList, params.id]);
 
   useEffect(() => {
     setSelectedBreed(breedList?.filter((breed) => breed.id === params.id)[0]);

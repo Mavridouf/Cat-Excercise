@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { getCatDetails } from "../api/cats";
+import ToastsContext, { toastTypes } from "../context/toasts-context";
 
 export function useCatDetails() {
+  const { addToast } = useContext(ToastsContext);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [catDetails, setCatDetails] = useState(null);
@@ -17,6 +20,7 @@ export function useCatDetails() {
       .catch(() => {
         setCatDetails(null);
         setError(true);
+        addToast(toastTypes.Error, "Fetching Cat Details Failed Failed");
       })
       .finally(() => {
         setLoading(false);

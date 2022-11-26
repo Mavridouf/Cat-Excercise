@@ -23,14 +23,22 @@ h2 {
     font-weight: 600;
     text-decoration: none;
     padding: 6px 0;
+    color: var(--primary-text-color);
+}
+
+.link-container a:visited {
+    color: inherit;
 }
 
 .link-container a:hover {
     color: var(--secondary-text-color)
-
 }
+
 
 .link-container a.active {
     color: var(--secondary-text-color);
-    border-bottom: 3px solid var(--primary-color)
 } 
+
+.link-container a .link-icon{
+   margin-right: 8px;
+}
