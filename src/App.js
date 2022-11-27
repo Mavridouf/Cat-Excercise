@@ -1,11 +1,4 @@
-import React, {
-  Suspense,
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { Suspense } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import classes from "./App.module.css";
 import Header from "./components/header/Header";

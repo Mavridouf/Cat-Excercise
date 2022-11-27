@@ -4,6 +4,7 @@
     background-color: black;
     border-radius: 8px;
     cursor: pointer;
+    position: relative;
 }
 
 .tile.small {
@@ -17,3 +18,11 @@
    object-fit: cover;
    border-radius: 8px;
 }
+
+.tile img:hover {
+    outline: 4px solid var(--background-color-black-600);
+ }
+
+ .tile img:focus {
+    outline: 4px solid var(--background-color-black-600);
+ }
