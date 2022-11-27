@@ -19,7 +19,7 @@ function Favourites() {
     return () => {
       clearFavouritesList();
     };
-  }, []);
+  }, [fetchFavourites, clearFavouritesList]);
 
   const catListImgTiles = () => {
     return favouritesList?.map((favourite) => (

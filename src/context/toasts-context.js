@@ -1,6 +1,5 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
 import { useToasts } from "../hooks/toasts";
-import uuid from "react-uuid";
 
 export const toastTypes = {
   Error: "error",

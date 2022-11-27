@@ -8,21 +8,17 @@ import BreedsContext from "../../context/breeds-context";
 import BreedInfo from "../../components/breed-info/BreedInfo";
 
 function BreedDetails() {
-  const catsContext = useContext(CatsContext);
-  const breedsContext = useContext(BreedsContext);
-
-  const navigate = useNavigate();
-  const params = useParams();
-  const [selectedBreed, setSelectedBreed] = useState(null);
-
   const {
     catsList,
     loading: catsLoading,
     fetchCats,
     clearCatsList,
-  } = catsContext;
+  } = useContext(CatsContext);
+  const { breedList } = useContext(BreedsContext);
 
-  const { breedList } = breedsContext;
+  const navigate = useNavigate();
+  const params = useParams();
+  const [selectedBreed, setSelectedBreed] = useState(null);
 
   useEffect(() => {
     fetchCats(9, params.id);

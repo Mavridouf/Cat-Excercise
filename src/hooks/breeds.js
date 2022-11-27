@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import { getBreeds } from "../api/cats";
 import ToastsContext, { toastTypes } from "../context/toasts-context";
 
@@ -9,7 +9,7 @@ export function useBreeds() {
   const [error, setError] = useState(false);
   const [breedList, setBreedList] = useState(null);
 
-  const fetchBreeds = () => {
+  const fetchBreeds = useCallback(() => {
     setLoading(true);
     setError(false);
     getBreeds()
@@ -25,11 +25,11 @@ export function useBreeds() {
       .finally(() => {
         setLoading(false);
       });
-  };
+  }, [addToast]);
 
-  const clearBreedList = () => {
+  const clearBreedList = useCallback(() => {
     setBreedList(null);
-  };
+  }, []);
 
   return {
     loading,

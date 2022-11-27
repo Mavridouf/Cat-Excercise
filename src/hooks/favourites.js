@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { getFavourites, markAsFavourite, deleteFavourite } from "../api/cats";
 import ToastsContext, { toastTypes } from "../context/toasts-context";
 
@@ -13,7 +13,7 @@ export function useFavourites() {
   const [favouritesList, setFavouritesList] = useState(null);
   const [deleteFavouriteSuccess, setDeleteFavouriteSuccess] = useState(null);
 
-  const fetchFavourites = () => {
+  const fetchFavourites = useCallback(() => {
     setLoadingFavourites(true);
     setError(false);
     getFavourites()
@@ -29,65 +29,71 @@ export function useFavourites() {
       .finally(() => {
         setLoadingFavourites(false);
       });
-  };
+  }, [addToast]);
 
-  const addToFavourites = (image_id) => {
-    setLoadingMarkFavourite(true);
-    setError(false);
-    markAsFavourite(image_id)
-      .then((resp) => {
-        if (resp.data.message === "SUCCESS") {
-          addToast(toastTypes.Success, "Image Added Favorites");
-        } else {
+  const addToFavourites = useCallback(
+    (image_id) => {
+      setLoadingMarkFavourite(true);
+      setError(false);
+      markAsFavourite(image_id)
+        .then((resp) => {
+          if (resp.data.message === "SUCCESS") {
+            addToast(toastTypes.Success, "Image Added Favorites");
+          } else {
+            addToast(toastTypes.Error, "Failed to Add Favorite");
+          }
+          setError(false);
+        })
+        .catch(() => {
+          setError(true);
           addToast(toastTypes.Error, "Failed to Add Favorite");
-        }
-        setError(false);
-      })
-      .catch(() => {
-        setError(true);
-        addToast(toastTypes.Error, "Failed to Add Favorite");
-      })
-      .finally(() => {
-        setLoadingMarkFavourite(false);
-      });
-  };
+        })
+        .finally(() => {
+          setLoadingMarkFavourite(false);
+        });
+    },
+    [addToast]
+  );
 
-  const deleteFromFavourites = (favourite_id) => {
-    setLoadingDeleteFavourite(true);
-    setError(false);
-    deleteFavourite(favourite_id)
-      .then((resp) => {
-        if (resp.data.message === "SUCCESS") {
-          setDeleteFavouriteSuccess({
-            success: resp.data.message === "SUCCESS",
-            favourite_id: favourite_id,
-          });
-          addToast(toastTypes.Success, "Image Removed from Favorites");
-        } else {
+  const deleteFromFavourites = useCallback(
+    (favourite_id) => {
+      setLoadingDeleteFavourite(true);
+      setError(false);
+      deleteFavourite(favourite_id)
+        .then((resp) => {
+          if (resp.data.message === "SUCCESS") {
+            setDeleteFavouriteSuccess({
+              success: resp.data.message === "SUCCESS",
+              favourite_id: favourite_id,
+            });
+            addToast(toastTypes.Success, "Image Removed from Favorites");
+          } else {
+            addToast(toastTypes.Error, "Failed to Remove Favorite");
+          }
+          setError(false);
+        })
+        .catch(() => {
+          setError(true);
           addToast(toastTypes.Error, "Failed to Remove Favorite");
-        }
-        setError(false);
-      })
-      .catch(() => {
-        setError(true);
-        addToast(toastTypes.Error, "Failed to Remove Favorite");
-      })
-      .finally(() => {
-        setLoadingDeleteFavourite(false);
-      });
-  };
+        })
+        .finally(() => {
+          setLoadingDeleteFavourite(false);
+        });
+    },
+    [addToast]
+  );
 
   useEffect(() => {
-    setFavouritesList(
+    setFavouritesList((favouritesList) =>
       favouritesList?.filter((favItem) => {
         return favItem.id !== deleteFavouriteSuccess?.favourite_id;
       })
     );
-  }, [deleteFavouriteSuccess]);
+  }, [deleteFavouriteSuccess, setFavouritesList]);
 
-  const clearFavouritesList = () => {
+  const clearFavouritesList = useCallback(() => {
     setFavouritesList(null);
-  };
+  }, []);
 
   return {
     loadingFavourites,

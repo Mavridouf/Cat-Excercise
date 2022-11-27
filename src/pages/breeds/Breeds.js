@@ -15,19 +15,23 @@ function Breeds() {
   useEffect(() => {
     fetchBreeds();
     return () => clearBreedList();
-  }, []);
+  }, [clearBreedList, fetchBreeds]);
 
   useEffect(() => {
-    const debouceTimer = setTimeout(() => {
-      setFilteredBreeds(
-        breedList?.filter((breed) => {
-          return breed.name
-            ?.toLowerCase()
-            ?.includes(breedFilter?.toLowerCase());
-        })
-      );
-    }, 300);
-
+    let debouceTimer;
+    if (breedFilter === "") {
+      setFilteredBreeds(breedList);
+    } else {
+      debouceTimer = setTimeout(() => {
+        setFilteredBreeds(
+          breedList?.filter((breed) => {
+            return breed.name
+              ?.toLowerCase()
+              ?.includes(breedFilter?.toLowerCase());
+          })
+        );
+      }, 300);
+    }
     return () => {
       clearTimeout(debouceTimer);
     };

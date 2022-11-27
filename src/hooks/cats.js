@@ -1,7 +1,6 @@
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import { getCats } from "../api/cats";
 import ToastsContext, { toastTypes } from "../context/toasts-context";
-import { useToasts } from "./toasts";
 
 export function useCats() {
   const { addToast } = useContext(ToastsContext);

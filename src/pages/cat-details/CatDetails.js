@@ -19,15 +19,16 @@ function CatDetails() {
   const params = useParams();
   const navigate = useNavigate();
 
-  const { catDetails, loading } = catDetailsContext;
+  const { fetchCatDetails, clearDetails, catDetails, loading } =
+    catDetailsContext;
 
   useEffect(() => {
-    catDetailsContext.fetchCatDetails(params.id);
+    fetchCatDetails(params.id);
 
     return () => {
-      catDetailsContext.clearDetails();
+      clearDetails();
     };
-  }, []);
+  }, [fetchCatDetails, clearDetails, params.id]);
 
   const copyImgUrl = () => {
     navigator.clipboard
@@ -53,7 +54,7 @@ function CatDetails() {
                   <BreedInfo breed={catDetails.breeds[0]} />
                 </div>
               )}
-              {(!catDetails.breeds || catDetails.breeds.length == 0) && (
+              {(!catDetails.breeds || catDetails.breeds.length === 0) && (
                 <div className={classes["no-details-container"]}>
                   No Details found
                 </div>
