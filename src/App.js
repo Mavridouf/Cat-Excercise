@@ -57,7 +57,9 @@ function App() {
                 element={
                   <CatsProvider>
                     <CatDetailsProvider>
-                      <CatsMainPage />
+                      <FavouritesProvider>
+                        <CatsMainPage />
+                      </FavouritesProvider>
                     </CatDetailsProvider>
                   </CatsProvider>
                 }
