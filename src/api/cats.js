@@ -1,6 +1,8 @@
 import { axiosInstance, shortUUID } from "./api";
 
-// Remember to implement Deduplication
+// TODO
+// Implement deduplication of requests
+// Would look into react-query
 
 export const getCats = (limit, breed) => {
   return axiosInstance.get("/images/search", {

@@ -11,6 +11,9 @@ import { FavouritesProvider } from "./context/favourites-context";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShieldCat } from "@fortawesome/free-solid-svg-icons";
 
+// TODO
+// Implement Responsiveness with media queries
+
 // In such a small app it might not make sense to implement Route based Lazy Loading
 
 const CatsMainPage = React.lazy(() =>

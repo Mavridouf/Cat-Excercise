@@ -6,16 +6,16 @@ import Button from "../../components/button/Button";
 import CatDetailsContext from "../../context/cat-details-context";
 import classes from "./CatDetails.module.css";
 import BreedInfo from "../../components/breed-info/BreedInfo";
-import { useFavourites } from "../../hooks/favourites";
 import ToastsContext, { toastTypes } from "../../context/toasts-context";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy, faHeart } from "@fortawesome/free-solid-svg-icons";
+import FavoritesContext from "../../context/favourites-context";
 
 function CatDetails() {
   const catDetailsContext = useContext(CatDetailsContext);
   const { addToast } = useContext(ToastsContext);
 
-  const { addToFavourites } = useFavourites();
+  const { addToFavourites } = useContext(FavoritesContext);
   const params = useParams();
   const navigate = useNavigate();
 
