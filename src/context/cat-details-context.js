@@ -7,13 +7,20 @@ const CatDetailsContext = React.createContext({
   error: false,
   fetchCatDetails: null,
   clearDetails: null,
+  setCatDetails: null,
 });
 
 export default CatDetailsContext;
 
 export const CatDetailsProvider = (props) => {
-  const { catDetails, loading, error, fetchCatDetails, clearDetails } =
-    useCatDetails();
+  const {
+    catDetails,
+    loading,
+    error,
+    fetchCatDetails,
+    clearDetails,
+    setCatDetails,
+  } = useCatDetails();
 
   return (
     <CatDetailsContext.Provider
@@ -23,6 +30,7 @@ export const CatDetailsProvider = (props) => {
         error: error,
         fetchCatDetails: fetchCatDetails,
         clearDetails: clearDetails,
+        setCatDetails: setCatDetails,
       }}
     >
       {props.children}

@@ -40,5 +40,6 @@ export function useCatDetails() {
     catDetails,
     fetchCatDetails,
     clearDetails,
+    setCatDetails,
   };
 }

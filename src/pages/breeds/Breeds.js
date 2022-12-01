@@ -1,6 +1,7 @@
 import { Fragment, useContext, useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import BreedItem from "../../components/breed-item/BreedItem";
+import Spinner from "../../components/spinner/Spinner";
 import TextInput from "../../components/text-input/TextInput";
 import BreedsContext from "../../context/breeds-context";
 import BreedDetails from "../breed-details/BreedDetails";
@@ -49,9 +50,7 @@ function Breeds() {
 
   return (
     <Fragment>
-      {loading && (
-        <div className={classes["loading-container"]}>Loading ...</div>
-      )}
+      {loading && <Spinner />}
       {!loading && breedList?.length > 0 && (
         <Fragment>
           <div className={classes["breeds-container"]}>
@@ -65,7 +64,7 @@ function Breeds() {
         </Fragment>
       )}
       <Routes>
-        <Route path=":id" element={<BreedDetails />}></Route>
+        <Route path=":id" element={<BreedDetails />}/>
       </Routes>
     </Fragment>
   );

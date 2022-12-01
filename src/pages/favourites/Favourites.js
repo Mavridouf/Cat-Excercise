@@ -1,18 +1,19 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import ImgTile from "../../components/img-tile/ImgTile";
-import FavoritesContext from "../../context/favourites-context";
 import classes from "./Favourites.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeartCrack } from "@fortawesome/free-solid-svg-icons";
+import TileGrid from "../../components/tile-grid/TileGrid";
+import FavTile from "../../components/fav-tile/FavTile";
+import Spinner from "../../components/spinner/Spinner";
+import { useFavourites } from "../../hooks/favourites";
 
 function Favourites() {
   const {
     favouritesList,
+    deleteFromFavourites,
     loadingFavourites,
     fetchFavourites,
-    deleteFromFavourites,
     clearFavouritesList,
-  } = useContext(FavoritesContext);
+  } = useFavourites();
 
   useEffect(() => {
     fetchFavourites();
@@ -23,17 +24,17 @@ function Favourites() {
 
   const catListImgTiles = () => {
     return favouritesList?.map((favourite) => (
-      <div key={favourite.id} className={classes["fav-tile-wrapper"]}>
-        <ImgTile url={favourite.image.url} id={favourite.image.id} />
-        <div className={classes["tile-overlay"]}>
-          <FontAwesomeIcon
-            onClick={() => deleteFromFavourites(favourite.id)}
-            className={classes["btn-icon"]}
-            icon={faHeartCrack}
-            size="4x"
-          />
-        </div>
-      </div>
+      <FavTile
+        key={favourite?.id}
+        onClick={() => deleteFromFavourites(favourite?.id)}
+        favourite={favourite}
+      >
+        <ImgTile
+          key={favourite?.image.id}
+          url={favourite?.image.url}
+          id={favourite?.image.id}
+        />
+      </FavTile>
     ));
   };
 
@@ -50,11 +51,11 @@ function Favourites() {
 
   return (
     <React.Fragment>
-      {loadingFavourites && (
-        <div className={classes["loading-container"]}>Loading ...</div>
-      )}
+      {loadingFavourites && <Spinner />}
       {!loadingFavourites && (
-        <div className={classes["tile-container"]}> {catListImgTiles()}</div>
+        <TileGrid className={classes["tile-container"]}>
+          {catListImgTiles()}
+        </TileGrid>
       )}
     </React.Fragment>
   );

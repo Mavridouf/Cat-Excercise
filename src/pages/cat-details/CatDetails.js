@@ -9,13 +9,14 @@ import BreedInfo from "../../components/breed-info/BreedInfo";
 import ToastsContext, { toastTypes } from "../../context/toasts-context";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy, faHeart } from "@fortawesome/free-solid-svg-icons";
-import FavoritesContext from "../../context/favourites-context";
+import Spinner from "../../components/spinner/Spinner";
+import { useFavourites } from "../../hooks/favourites";
 
 function CatDetails() {
   const catDetailsContext = useContext(CatDetailsContext);
   const { addToast } = useContext(ToastsContext);
 
-  const { addToFavourites } = useContext(FavoritesContext);
+  const { addToFavourites } = useFavourites();
   const params = useParams();
   const navigate = useNavigate();
 
@@ -23,6 +24,7 @@ function CatDetails() {
     catDetailsContext;
 
   useEffect(() => {
+    if (catDetails) return;
     fetchCatDetails(params.id);
 
     return () => {
@@ -40,13 +42,11 @@ function CatDetails() {
   return (
     <Modal onClose={() => navigate(`/cats`)}>
       <div className={classes["body"]}>
-        {loading && (
-          <div className={classes["loading-container"]}>Loading ...</div>
-        )}
+        {loading && <Spinner />}
         {!loading && catDetails && (
           <Fragment>
             <div className={classes.col1}>
-              <img src={catDetails.url}></img>
+              <img src={catDetails.url}/>
             </div>
             <div className={classes.col2}>
               {catDetails.breeds && catDetails.breeds.length > 0 && (

@@ -1,13 +1,11 @@
 import React, { Suspense } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, NavLink } from "react-router-dom";
 import classes from "./App.module.css";
 import Header from "./components/header/Header";
-import { CatsProvider } from "./context/cats-context";
 import { BreedsProvider } from "./context/breeds-context";
 import { CatDetailsProvider } from "./context/cat-details-context";
 import { ToastsProvider } from "./context/toasts-context";
 import Toasts from "./components/toasts/Toasts";
-import { FavouritesProvider } from "./context/favourites-context";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShieldCat } from "@fortawesome/free-solid-svg-icons";
 
@@ -45,47 +43,43 @@ const SuspenseFallback = () => {
 function App() {
   return (
     <ToastsProvider>
-      <div className="App">
-        <Toasts />
-        <Header></Header>
-        <Suspense fallback={<SuspenseFallback />}>
+      <CatDetailsProvider>
+        <div className="App">
+          <Toasts />
+          <Header/>
           <div className={classes.container}>
-            <Routes>
-              <Route path="/" element={<Navigate replace to="/cats" />} />
-              <Route
-                path="/cats/*"
-                element={
-                  <CatsProvider>
-                    <CatDetailsProvider>
-                      <FavouritesProvider>
-                        <CatsMainPage />
-                      </FavouritesProvider>
-                    </CatDetailsProvider>
-                  </CatsProvider>
-                }
-              ></Route>
-              <Route
-                path="/breeds/*"
-                element={
-                  <BreedsProvider>
-                    <CatsProvider>
-                      <BreedsPage />
-                    </CatsProvider>
-                  </BreedsProvider>
-                }
-              ></Route>
-              <Route
-                path="/favourites"
-                element={
-                  <FavouritesProvider>
-                    <FavouritesPage />
-                  </FavouritesProvider>
-                }
-              ></Route>
-            </Routes>
+            <div className={classes["routes-wrapper"]}>
+              <Suspense fallback={<SuspenseFallback />}>
+                <Routes>
+                  <Route
+                    path="*"
+                    element={
+                      <h1>
+                        404 Page Not Found try navigating to{" "}
+                        <NavLink to="cats">Cats Home Page</NavLink>
+                      </h1>
+                    }
+                  />
+                  <Route path="/" element={<Navigate replace to="/cats" />} />
+                  <Route path="/cats/*" element={<CatsMainPage />}/>
+                  <Route
+                    path="/breeds/*"
+                    element={
+                      <BreedsProvider>
+                        <BreedsPage />
+                      </BreedsProvider>
+                    }
+                  />
+                  <Route
+                    path="/favourites"
+                    element={<FavouritesPage />}
+                  />
+                </Routes>
+              </Suspense>
+            </div>
           </div>
-        </Suspense>
-      </div>
+        </div>
+      </CatDetailsProvider>
     </ToastsProvider>
   );
 }

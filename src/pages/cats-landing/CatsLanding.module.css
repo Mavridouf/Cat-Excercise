@@ -5,21 +5,6 @@
         justify-content: end;
 }
 
-.tile-container {
-        display: flex;
-        flex-wrap: wrap;
-}
-
-.tile-container > * {
-      margin: 20px 36px;
-}
-
-.loading-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-}
-
 .btn-icon {
         margin-right: 8px;
     }

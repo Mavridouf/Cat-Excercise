@@ -1,6 +1,13 @@
 .container {
-    padding: 56px 40px;
+    width: calc(100% - (var(--nav-medium-size) + 24px));
+    margin-left: auto;
+    padding: 56px 0;
     position: relative;
+}
+
+.container .routes-wrapper {
+    max-width: 80%;
+    margin:auto;
 }
 
 .suspense-fallback-container {
@@ -11,4 +18,18 @@
 
 .suspense-badge-icon {
     color: var(--primary-color);
+}
+
+@media only screen and (max-width: 1264px) {
+    .container{
+        width: calc(100% - (var(--nav-small-size) + 24px));
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .container{
+        width: 100%;
+        padding-top: 24px;
+        padding-bottom: 64px;
+    }    
 }

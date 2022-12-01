@@ -1,28 +1,29 @@
 .header {
-    height: 80px;
-    padding: 0 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    color: var(--primary-text-color);
-    background-color: #fff;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    width: var(--nav-medium-size);
+    position: fixed;
+    height: 100vh;
+    background-color: var(--background-color-white);
+    border-right: 1px solid var(--background-color-grey-dark);
+    padding: 56px 12px;
+    z-index: 1;
 }
 
 h2 {
-    margin-left: 24px;
+   margin: 0; 
+   padding: 0 12px;
 }
 
 .link-container {
-    display: flex;
-    align-items: center;
+    margin-top: 56px
 }
 
 .link-container a {
-    margin: 0 24px;
-    font-weight: 600;
+    display: flex;
+    align-items: center;
+    margin: 16px 4px;
     text-decoration: none;
-    padding: 6px 0;
+    padding: 16px 12px;
+    border-radius: 40px;
     color: var(--primary-text-color);
 }
 
@@ -31,14 +32,74 @@ h2 {
 }
 
 .link-container a:hover {
-    color: var(--secondary-text-color)
+    background-color: var(--background-color-gray);
 }
 
+.link-container a .link-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 20px;
+    transition: scale 5s ease-in-out;
+ }
+ 
+.link-container a:hover .link-icon{
+    transform: scale(1.04);
+}
 
 .link-container a.active {
+    font-weight: 600;
     color: var(--secondary-text-color);
 } 
 
-.link-container a .link-icon{
-   margin-right: 8px;
+@media only screen and (max-width: 1264px) {
+    .header {
+        width: var(--nav-small-size);
+        padding: 56px 12px;
+    }   
+
+    h2 {
+        display: none;
+    }
+
+    .link-container {
+        margin-top: 0;
+    }
+
+    .link-container a {
+        justify-content: center;
+    }
+
+    .link-container a .link-icon {
+        margin-right: 0;
+     }
+
+    .link-container a span {
+        display: none;
+     }
+}
+
+@media only screen and (max-width: 767px) {
+    .header {
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        background-color: var(--background-color-white);
+        padding: 0;
+        height: 46px;
+        border-right: 0;
+        border-top: 1px solid var(--background-color-grey-dark);
+    }   
+
+    .link-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 64px;
+        height: 100%;
+    }
+
+    .link-container a{
+        margin: 0;
+        padding: 0;
+    }
 }

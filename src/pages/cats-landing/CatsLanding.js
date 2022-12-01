@@ -1,21 +1,27 @@
 import React, { useContext, useEffect } from "react";
-import CatsContext from "../../context/cats-context";
 import Button from "../../components/button/Button";
 import ImgTile from "../../components/img-tile/ImgTile";
 import classes from "./CatsLanding.module.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import CatDetails from "../cat-details/CatDetails";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRefresh } from "@fortawesome/free-solid-svg-icons";
+import TileGrid from "../../components/tile-grid/TileGrid";
+import Spinner from "../../components/spinner/Spinner";
+import { useCats } from "../../hooks/cats";
+import CatDetailsContext from "../../context/cat-details-context";
+
 function CatsLanding() {
-  const catsContext = useContext(CatsContext);
+  const navigate = useNavigate();
 
   const {
     catsList: catsListData,
     loading,
     fetchCats,
     clearCatsList,
-  } = catsContext;
+  } = useCats();
+
+  const { setCatDetails } = useContext(CatDetailsContext);
 
   useEffect(() => {
     fetchCats(10);
@@ -24,9 +30,18 @@ function CatsLanding() {
     };
   }, [fetchCats, clearCatsList]);
 
+  const handleImgTileClick = (cat) => {
+    setCatDetails(cat);
+    navigate(cat.id);
+  };
+
   const catListImgTiles = () => {
     return catsListData?.map((cat) => (
-      <ImgTile key={cat.id} url={cat.url} id={cat.id} />
+      <ImgTile
+        onClick={() => handleImgTileClick(cat)}
+        key={cat.id}
+        url={cat.url}
+      />
     ));
   };
 
@@ -34,19 +49,14 @@ function CatsLanding() {
     <React.Fragment>
       <div className={classes["top-row"]}>
         <Button click={() => fetchCats(10)}>
-          {" "}
           <FontAwesomeIcon className={classes["btn-icon"]} icon={faRefresh} />
           Update Cats
         </Button>
       </div>
-      {loading && (
-        <div className={classes["loading-container"]}>Loading ...</div>
-      )}
-      {!loading && (
-        <div className={classes["tile-container"]}> {catListImgTiles()}</div>
-      )}
+      {loading && <Spinner />}
+      {!loading && <TileGrid>{catListImgTiles()}</TileGrid>}
       <Routes>
-        <Route path=":id" element={<CatDetails />}></Route>
+        <Route path=":id" element={<CatDetails />}/>
       </Routes>
     </React.Fragment>
   );

@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import classes from "./Header.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCat,
+  faPaw,
   faBabyCarriage,
   faHeart,
 } from "@fortawesome/free-solid-svg-icons";
@@ -16,8 +16,8 @@ function Header() {
           to="cats"
           className={({ isActive }) => (isActive ? classes.active : undefined)}
         >
-          <FontAwesomeIcon className={classes["link-icon"]} icon={faCat} />
-          Cats
+          <FontAwesomeIcon className={classes["link-icon"]} icon={faPaw} />
+          <span>Cats</span>
         </NavLink>
         <NavLink
           to="breeds"
@@ -27,14 +27,14 @@ function Header() {
             className={classes["link-icon"]}
             icon={faBabyCarriage}
           />
-          Breeds
+          <span>Breeds</span>
         </NavLink>
         <NavLink
           to="favourites"
           className={({ isActive }) => (isActive ? classes.active : undefined)}
         >
           <FontAwesomeIcon className={classes["link-icon"]} icon={faHeart} />
-          Favourites
+          <span>Favourites</span>
         </NavLink>
       </div>
     </div>
