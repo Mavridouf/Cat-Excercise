@@ -8,6 +8,7 @@ import { ToastsProvider } from "./context/toasts-context";
 import Toasts from "./components/toasts/Toasts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShieldCat } from "@fortawesome/free-solid-svg-icons";
+import NotFound from "./pages/not-found/NotFound";
 
 // TODO
 // Implement Responsiveness with media queries
@@ -54,10 +55,7 @@ function App() {
                   <Route
                     path="*"
                     element={
-                      <h1>
-                        404 Page Not Found try navigating to{" "}
-                        <NavLink to="cats">Cats Home Page</NavLink>
-                      </h1>
+                      <NotFound/>
                     }
                   />
                   <Route path="/" element={<Navigate replace to="/cats" />} />
